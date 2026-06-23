@@ -1,0 +1,11 @@
+{
+  "name": "EnglishAcademic",
+  "short_name": "EnglishAcademic",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f7fa",
+  "theme_color": "#2b5d8c",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

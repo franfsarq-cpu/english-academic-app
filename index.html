@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#2b5d8c">
+<title>EnglishAcademic</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>🎓 EnglishAcademic</h1>
+  <p class="subtitle">Inglês para vida acadêmica</p>
+</header>
+
+<nav id="tabs">
+  <button class="tab-btn active" data-tab="reader">📖 Leitura</button>
+  <button class="tab-btn" data-tab="speak">🎤 Fala</button>
+  <button class="tab-btn" data-tab="vocab">📚 Vocabulário</button>
+</nav>
+
+<main>
+
+  <!-- ===== READER TAB ===== -->
+  <section id="reader" class="tab-content active">
+    <h2>Leitor de Textos Acadêmicos</h2>
+    <textarea id="readerText" placeholder="Cole aqui um trecho de artigo, abstract, ou qualquer texto em inglês...">In this study, we examine the relationship between cognitive load and academic performance among graduate students. The methodology employed a mixed-methods approach, combining quantitative survey data with qualitative interviews.</textarea>
+
+    <div class="controls-row">
+      <label>Voz:
+        <select id="voiceSelect"></select>
+      </label>
+    </div>
+    <div class="controls-row">
+      <label>Velocidade: <span id="rateValue">1.0</span>x
+        <input type="range" id="rateSlider" min="0.5" max="1.5" step="0.1" value="1.0">
+      </label>
+    </div>
+
+    <div class="btn-row">
+      <button id="playBtn" class="primary-btn">▶️ Ler em voz alta</button>
+      <button id="pauseBtn" class="secondary-btn" disabled>⏸️ Pausar</button>
+      <button id="stopBtn" class="secondary-btn" disabled>⏹️ Parar</button>
+    </div>
+    <p class="hint">Dica: a leitura destaca a palavra falada no texto.</p>
+  </section>
+
+  <!-- ===== SPEAK TAB ===== -->
+  <section id="speak" class="tab-content">
+    <h2>Prática de Pronúncia</h2>
+    <p class="hint">Escolha ou digite uma frase, depois aperte o microfone e repita em inglês.</p>
+
+    <select id="phraseSelect"></select>
+    <p id="targetPhrase" class="target-phrase"></p>
+
+    <div class="btn-row">
+      <button id="hearTargetBtn" class="secondary-btn">🔊 Ouvir frase</button>
+      <button id="micBtn" class="primary-btn">🎤 Falar</button>
+    </div>
+
+    <div id="speakResult" class="result-box" style="display:none;">
+      <p><strong>Você disse:</strong> <span id="heardText"></span></p>
+      <p><strong>Resultado:</strong> <span id="matchResult"></span></p>
+    </div>
+  </section>
+
+  <!-- ===== VOCAB TAB ===== -->
+  <section id="vocab" class="tab-content">
+    <h2>Vocabulário Acadêmico</h2>
+    <input type="text" id="vocabSearch" placeholder="Buscar termo...">
+    <div id="vocabList" class="vocab-list"></div>
+  </section>
+
+</main>
+
+<script src="vocab-data.js"></script>
+<script src="phrases-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
