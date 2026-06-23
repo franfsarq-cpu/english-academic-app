@@ -3,33 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#5b8c3a">
-<title>EnglishAcademic Farm</title>
+<meta name="theme-color" content="#2c1810">
+<title>Escolinha de Inglês da Fran</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="sky"></div>
 <header>
-  <div class="header-box">
+  <div class="header-plaque">
     <h1>🌾 Escolinha de Inglês da Fran</h1>
-    <p class="subtitle">Cultive seu inglês acadêmico ★彡</p>
+    <p class="subtitle">Engenharia Urbana · Modelagem Hidrológica</p>
   </div>
 </header>
 
 <nav id="tabs">
-  <button class="tab-btn active" data-tab="reader">📖 Leitura</button>
-  <button class="tab-btn" data-tab="speak">🎤 Fala</button>
-  <button class="tab-btn" data-tab="vocab">📚 Itens</button>
+  <button class="tab-btn active" data-tab="reader"><span class="tab-icon">📖</span>Leitura</button>
+  <button class="tab-btn" data-tab="speak"><span class="tab-icon">🎤</span>Fala</button>
+  <button class="tab-btn" data-tab="vocab"><span class="tab-icon">🎒</span>Itens</button>
+  <button class="tab-btn" data-tab="flashcards"><span class="tab-icon">🃏</span>Cards</button>
+  <button class="tab-btn" data-tab="academic"><span class="tab-icon">✉️</span>Frases</button>
 </nav>
 
 <main>
 
   <!-- ===== READER TAB ===== -->
-  <section id="reader" class="tab-content active">
+  <section id="reader" class="tab-content active dialog-box">
     <h2>📜 Pergaminho de Leitura</h2>
     <textarea id="readerText" placeholder="Cole aqui um trecho de artigo, abstract, ou qualquer texto em inglês...">In this study, we examine the relationship between cognitive load and academic performance among graduate students. The methodology employed a mixed-methods approach, combining quantitative survey data with qualitative interviews.</textarea>
 
@@ -45,16 +46,16 @@
     </div>
 
     <div class="btn-row">
-      <button id="playBtn" class="primary-btn">▶️ Ler em voz alta</button>
-      <button id="pauseBtn" class="secondary-btn" disabled>⏸️ Pausar</button>
-      <button id="stopBtn" class="secondary-btn" disabled>⏹️ Parar</button>
+      <button id="playBtn" class="primary-btn">▶ Ler em voz alta</button>
+      <button id="pauseBtn" class="secondary-btn" disabled>⏸ Pausar</button>
+      <button id="stopBtn" class="secondary-btn" disabled>⏹ Parar</button>
     </div>
-    <p class="hint">💡 Dica: ouça com atenção, igual quem escuta o NPC do vilarejo!</p>
+    <p class="hint">Dica: ouça com atenção, como quem registra um diário de campo.</p>
   </section>
 
   <!-- ===== SPEAK TAB ===== -->
-  <section id="speak" class="tab-content">
-    <h2>🗣️ Quest de Pronúncia</h2>
+  <section id="speak" class="tab-content dialog-box">
+    <h2>🗣 Quest de Pronúncia</h2>
     <p class="hint">Escolha uma missão (frase), ouça o exemplo e repita em inglês pra completar a quest.</p>
 
     <select id="phraseSelect"></select>
@@ -72,16 +73,72 @@
   </section>
 
   <!-- ===== VOCAB TAB ===== -->
-  <section id="vocab" class="tab-content">
+  <section id="vocab" class="tab-content dialog-box">
     <h2>🎒 Inventário de Vocabulário</h2>
     <input type="text" id="vocabSearch" placeholder="🔍 Buscar item...">
     <div id="vocabList" class="vocab-list"></div>
+  </section>
+
+  <!-- ===== FLASHCARDS TAB ===== -->
+  <section id="flashcards" class="tab-content dialog-box">
+    <h2>🃏 Cartas de Estudo</h2>
+
+    <div class="xp-bar-wrap">
+      <span class="xp-label">XP: <span id="xpValue">0</span></span>
+      <div class="xp-bar"><div id="xpFill" class="xp-fill"></div></div>
+    </div>
+
+    <div class="mode-switch">
+      <button id="studyModeBtn" class="primary-btn small">📖 Estudar</button>
+      <button id="quizModeBtn" class="secondary-btn small">❓ Quiz</button>
+    </div>
+
+    <!-- Study mode -->
+    <div id="studyMode">
+      <div id="flashcard" class="flashcard">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <span id="cardTerm"></span>
+          </div>
+          <div class="flashcard-back">
+            <p id="cardTranslation" class="card-translation"></p>
+            <p id="cardExample" class="card-example"></p>
+          </div>
+        </div>
+      </div>
+      <p class="hint">Toque na carta para virar.</p>
+      <div class="btn-row">
+        <button id="prevCardBtn" class="secondary-btn">⟵ Anterior</button>
+        <button id="nextCardBtn" class="primary-btn">Próxima ⟶</button>
+      </div>
+    </div>
+
+    <!-- Quiz mode -->
+    <div id="quizMode" style="display:none;">
+      <p class="quiz-prompt">Traduza para português:</p>
+      <p id="quizTerm" class="target-phrase"></p>
+      <input type="text" id="quizAnswer" placeholder="Digite a tradução...">
+      <div class="btn-row">
+        <button id="quizCheckBtn" class="primary-btn">✔ Confirmar</button>
+        <button id="quizSkipBtn" class="secondary-btn">⟶ Pular</button>
+      </div>
+      <div id="quizFeedback" class="result-box" style="display:none;"></div>
+    </div>
+  </section>
+
+  <!-- ===== ACADEMIC PHRASES TAB ===== -->
+  <section id="academic" class="tab-content dialog-box">
+    <h2>✉ Frases Acadêmicas</h2>
+    <select id="sectionSelect"></select>
+    <div id="academicPhrasesList" class="academic-list"></div>
   </section>
 
 </main>
 
 <script src="vocab-data.js"></script>
 <script src="phrases-data.js"></script>
+<script src="flashcards-data.js"></script>
+<script src="academic-phrases-data.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

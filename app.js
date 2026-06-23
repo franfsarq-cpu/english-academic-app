@@ -213,6 +213,138 @@ function renderVocab(filter = "") {
 renderVocab();
 vocabSearch.addEventListener("input", () => renderVocab(vocabSearch.value));
 
+// ===== Flashcards + Quiz tab =====
+const XP_KEY = "englishFarm_xp";
+let xp = parseInt(localStorage.getItem(XP_KEY) || "0", 10);
+
+const xpValueEl = document.getElementById("xpValue");
+const xpFillEl = document.getElementById("xpFill");
+
+function renderXp() {
+  xpValueEl.textContent = xp;
+  xpFillEl.style.width = `${xp % 100}%`;
+}
+renderXp();
+
+function addXp(amount) {
+  xp += amount;
+  localStorage.setItem(XP_KEY, String(xp));
+  renderXp();
+}
+
+const studyModeBtn = document.getElementById("studyModeBtn");
+const quizModeBtn = document.getElementById("quizModeBtn");
+const studyModeEl = document.getElementById("studyMode");
+const quizModeEl = document.getElementById("quizMode");
+
+studyModeBtn.addEventListener("click", () => {
+  studyModeEl.style.display = "block";
+  quizModeEl.style.display = "none";
+});
+quizModeBtn.addEventListener("click", () => {
+  studyModeEl.style.display = "none";
+  quizModeEl.style.display = "block";
+  newQuizQuestion();
+});
+
+// --- Study mode ---
+let cardIndex = 0;
+const flashcardEl = document.getElementById("flashcard");
+const cardTermEl = document.getElementById("cardTerm");
+const cardTranslationEl = document.getElementById("cardTranslation");
+const cardExampleEl = document.getElementById("cardExample");
+const prevCardBtn = document.getElementById("prevCardBtn");
+const nextCardBtn = document.getElementById("nextCardBtn");
+
+function renderCard() {
+  const card = FLASHCARDS_DATA[cardIndex];
+  flashcardEl.classList.remove("flipped");
+  cardTermEl.textContent = card.term;
+  cardTranslationEl.textContent = card.translation;
+  cardExampleEl.textContent = card.example;
+}
+renderCard();
+
+flashcardEl.addEventListener("click", () => {
+  flashcardEl.classList.toggle("flipped");
+});
+
+prevCardBtn.addEventListener("click", () => {
+  cardIndex = (cardIndex - 1 + FLASHCARDS_DATA.length) % FLASHCARDS_DATA.length;
+  renderCard();
+});
+nextCardBtn.addEventListener("click", () => {
+  cardIndex = (cardIndex + 1) % FLASHCARDS_DATA.length;
+  renderCard();
+});
+
+// --- Quiz mode ---
+const quizTermEl = document.getElementById("quizTerm");
+const quizAnswerEl = document.getElementById("quizAnswer");
+const quizCheckBtn = document.getElementById("quizCheckBtn");
+const quizSkipBtn = document.getElementById("quizSkipBtn");
+const quizFeedbackEl = document.getElementById("quizFeedback");
+let currentQuizCard = null;
+
+function newQuizQuestion() {
+  currentQuizCard = FLASHCARDS_DATA[Math.floor(Math.random() * FLASHCARDS_DATA.length)];
+  quizTermEl.textContent = currentQuizCard.term;
+  quizAnswerEl.value = "";
+  quizFeedbackEl.style.display = "none";
+}
+
+function normalize(str) {
+  return str.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+}
+
+quizCheckBtn.addEventListener("click", () => {
+  if (!currentQuizCard) return;
+  const userAnswer = normalize(quizAnswerEl.value);
+  const correctAnswer = normalize(currentQuizCard.translation);
+  quizFeedbackEl.style.display = "block";
+
+  if (userAnswer && correctAnswer.includes(userAnswer) && userAnswer.length > 2) {
+    quizFeedbackEl.textContent = "✅ Acertou! +10 XP";
+    quizFeedbackEl.className = "result-box good";
+    addXp(10);
+    setTimeout(newQuizQuestion, 1200);
+  } else {
+    quizFeedbackEl.textContent = `❌ Quase! A resposta era: "${currentQuizCard.translation}"`;
+    quizFeedbackEl.className = "result-box bad";
+  }
+});
+
+quizSkipBtn.addEventListener("click", newQuizQuestion);
+
+// ===== Academic phrases tab =====
+const sectionSelect = document.getElementById("sectionSelect");
+const academicPhrasesList = document.getElementById("academicPhrasesList");
+
+Object.keys(ACADEMIC_PHRASES_DATA).forEach((section) => {
+  const opt = document.createElement("option");
+  opt.value = section;
+  opt.textContent = section;
+  sectionSelect.appendChild(opt);
+});
+
+function renderAcademicPhrases() {
+  const section = sectionSelect.value;
+  academicPhrasesList.innerHTML = "";
+  ACADEMIC_PHRASES_DATA[section].forEach((phrase) => {
+    const card = document.createElement("div");
+    card.className = "academic-card";
+    card.innerHTML = `
+      <p class="academic-en">${phrase.en}</p>
+      <p class="academic-pt">${phrase.pt}</p>
+      <button class="academic-speak-btn">🔊 Ouvir</button>
+    `;
+    card.querySelector(".academic-speak-btn").addEventListener("click", () => speakText(phrase.en));
+    academicPhrasesList.appendChild(card);
+  });
+}
+sectionSelect.addEventListener("change", renderAcademicPhrases);
+renderAcademicPhrases();
+
 // ===== PWA: register service worker =====
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

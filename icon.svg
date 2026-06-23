@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="12" fill="#5b8c3a"/>
-  <rect x="4" y="4" width="92" height="92" rx="8" fill="none" stroke="#4d2f1a" stroke-width="6"/>
+  <rect width="100" height="100" rx="12" fill="#2c1810"/>
+  <rect x="4" y="4" width="92" height="92" rx="8" fill="none" stroke="#f4c842" stroke-width="6"/>
   <text x="50" y="68" font-size="50" text-anchor="middle" fill="white" font-family="sans-serif">🌾</text>
 </svg>

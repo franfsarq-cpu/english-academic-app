@@ -1,10 +1,10 @@
 {
-  "name": "English Academic Farm",
-  "short_name": "EngFarm",
+  "name": "Escolinha de Inglês da Fran",
+  "short_name": "EscolinhaFran",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#5b8c3a",
-  "theme_color": "#5b8c3a",
+  "background_color": "#2c1810",
+  "theme_color": "#2c1810",
   "icons": [
     { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
   ]
