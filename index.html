@@ -25,6 +25,8 @@
   <button class="tab-btn" data-tab="vocab"><span class="tab-icon">🎒</span>Itens</button>
   <button class="tab-btn" data-tab="flashcards"><span class="tab-icon">🃏</span>Cards</button>
   <button class="tab-btn" data-tab="academic"><span class="tab-icon">✉️</span>Frases</button>
+  <button class="tab-btn" data-tab="cloze"><span class="tab-icon">✏️</span>Cloze</button>
+  <button class="tab-btn" data-tab="progress"><span class="tab-icon">📈</span>Progresso</button>
 </nav>
 
 <main>
@@ -133,12 +135,59 @@
     <div id="academicPhrasesList" class="academic-list"></div>
   </section>
 
+  <!-- ===== CLOZE TAB ===== -->
+  <section id="cloze" class="tab-content dialog-box">
+    <h2>✏️ Modo Cloze</h2>
+    <p class="hint">Complete a lacuna com o termo técnico correto em inglês.</p>
+    <p id="clozeSentence" class="target-phrase"></p>
+    <input type="text" id="clozeAnswer" placeholder="Digite o termo que falta...">
+    <div class="btn-row">
+      <button id="clozeCheckBtn" class="primary-btn">✔ Confirmar</button>
+      <button id="clozeSkipBtn" class="secondary-btn">⟶ Pular</button>
+    </div>
+    <div id="clozeFeedback" class="result-box" style="display:none;"></div>
+  </section>
+
+  <!-- ===== PROGRESS TAB ===== -->
+  <section id="progress" class="tab-content dialog-box">
+    <h2>📈 Diário de Progresso</h2>
+
+    <div class="progress-stats">
+      <div class="stat-box"><span class="stat-value" id="statLevel">1</span><span class="stat-label">Nível</span></div>
+      <div class="stat-box"><span class="stat-value" id="statXp">0</span><span class="stat-label">XP Total</span></div>
+      <div class="stat-box"><span class="stat-value" id="statStreak">0</span><span class="stat-label">Sequência</span></div>
+      <div class="stat-box"><span class="stat-value" id="statBestStreak">0</span><span class="stat-label">Recorde</span></div>
+    </div>
+
+    <div class="xp-bar-wrap">
+      <span class="xp-label">Progresso para o próximo nível</span>
+      <div class="xp-bar"><div id="levelFill" class="xp-fill"></div></div>
+    </div>
+
+    <h2 class="sub-h2">🗓 Dias estudados</h2>
+    <div id="calendarGrid" class="calendar-grid"></div>
+
+    <h2 class="sub-h2">📊 Estatísticas</h2>
+    <div class="stat-rows">
+      <p>🃏 Flashcards dominados: <strong id="statMastered">0</strong></p>
+      <p>✏️ Exercícios Cloze concluídos: <strong id="statCloze">0</strong></p>
+      <p>🔊 Frases ouvidas: <strong id="statPhrases">0</strong></p>
+    </div>
+  </section>
+
 </main>
+
+<div id="levelUpBanner" class="level-up-banner" style="display:none;">
+  <p>🎉 LEVEL UP! 🎉</p>
+  <p id="levelUpText"></p>
+</div>
 
 <script src="vocab-data.js"></script>
 <script src="phrases-data.js"></script>
 <script src="flashcards-data.js"></script>
 <script src="academic-phrases-data.js"></script>
+<script src="cloze-data.js"></script>
+<script src="progress.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

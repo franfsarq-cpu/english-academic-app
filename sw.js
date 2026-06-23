@@ -1,4 +1,4 @@
-const CACHE_NAME = "english-academic-v3";
+const CACHE_NAME = "english-academic-v4";
 const ASSETS = [
   "./",
   "./index.html",
@@ -8,6 +8,8 @@ const ASSETS = [
   "./phrases-data.js",
   "./flashcards-data.js",
   "./academic-phrases-data.js",
+  "./cloze-data.js",
+  "./progress.js",
   "./manifest.json",
 ];
 
