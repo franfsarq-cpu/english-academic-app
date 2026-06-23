@@ -1,10 +1,10 @@
 {
-  "name": "EnglishAcademic",
-  "short_name": "EnglishAcademic",
+  "name": "English Academic Farm",
+  "short_name": "EngFarm",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f4f7fa",
-  "theme_color": "#2b5d8c",
+  "background_color": "#5b8c3a",
+  "theme_color": "#5b8c3a",
   "icons": [
     { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
   ]
