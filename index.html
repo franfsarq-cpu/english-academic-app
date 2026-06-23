@@ -3,28 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#2b5d8c">
-<title>EnglishAcademic</title>
+<meta name="theme-color" content="#5b8c3a">
+<title>EnglishAcademic Farm</title>
 <link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="sky"></div>
 <header>
-  <h1>🎓 EnglishAcademic</h1>
-  <p class="subtitle">Inglês para vida acadêmica</p>
+  <div class="header-box">
+    <h1>🌾 English Academic Farm</h1>
+    <p class="subtitle">Cultive seu inglês acadêmico ★彡</p>
+  </div>
 </header>
 
 <nav id="tabs">
   <button class="tab-btn active" data-tab="reader">📖 Leitura</button>
   <button class="tab-btn" data-tab="speak">🎤 Fala</button>
-  <button class="tab-btn" data-tab="vocab">📚 Vocabulário</button>
+  <button class="tab-btn" data-tab="vocab">📚 Itens</button>
 </nav>
 
 <main>
 
   <!-- ===== READER TAB ===== -->
   <section id="reader" class="tab-content active">
-    <h2>Leitor de Textos Acadêmicos</h2>
+    <h2>📜 Pergaminho de Leitura</h2>
     <textarea id="readerText" placeholder="Cole aqui um trecho de artigo, abstract, ou qualquer texto em inglês...">In this study, we examine the relationship between cognitive load and academic performance among graduate students. The methodology employed a mixed-methods approach, combining quantitative survey data with qualitative interviews.</textarea>
 
     <div class="controls-row">
@@ -43,13 +49,13 @@
       <button id="pauseBtn" class="secondary-btn" disabled>⏸️ Pausar</button>
       <button id="stopBtn" class="secondary-btn" disabled>⏹️ Parar</button>
     </div>
-    <p class="hint">Dica: a leitura destaca a palavra falada no texto.</p>
+    <p class="hint">💡 Dica: ouça com atenção, igual quem escuta o NPC do vilarejo!</p>
   </section>
 
   <!-- ===== SPEAK TAB ===== -->
   <section id="speak" class="tab-content">
-    <h2>Prática de Pronúncia</h2>
-    <p class="hint">Escolha ou digite uma frase, depois aperte o microfone e repita em inglês.</p>
+    <h2>🗣️ Quest de Pronúncia</h2>
+    <p class="hint">Escolha uma missão (frase), ouça o exemplo e repita em inglês pra completar a quest.</p>
 
     <select id="phraseSelect"></select>
     <p id="targetPhrase" class="target-phrase"></p>
@@ -67,8 +73,8 @@
 
   <!-- ===== VOCAB TAB ===== -->
   <section id="vocab" class="tab-content">
-    <h2>Vocabulário Acadêmico</h2>
-    <input type="text" id="vocabSearch" placeholder="Buscar termo...">
+    <h2>🎒 Inventário de Vocabulário</h2>
+    <input type="text" id="vocabSearch" placeholder="🔍 Buscar item...">
     <div id="vocabList" class="vocab-list"></div>
   </section>
 
